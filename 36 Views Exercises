@@ -1,3 +1,21 @@
+##36 Views exercises 1-10
 
+(10) SELECT "english_title" AS "How Many Times is Fuji Mentioned?", "artist" FROM "views" WHERE "english_title" LIKE '%Fuji%' ORDER BY "artist";
 
-SELECT "season", "title" FROM "episodes" WHERE "episode_in_season" = 1;
+(9) SELECT "english_title", "artist" FROM "views" WHERE "brightness" = (SELECT MAX(brightness) FROM "views");
+
+(8) SELECT "english_title" FROM "views" WHERE "artist" = 'Hokusai' ORDER BY "contrast" LIMIT 5;
+
+(7) SELECT "english_title" FROM "views" WHERE "artist" = 'Hiroshige' ORDER BY "brightness" DESC LIMIT 5;
+
+(6) SELECT ROUND(AVG(entropy), 2) AS 'Hiroshige Average Entropy' FROM "views" WHERE "artist" = 'Hiroshige';
+
+(5) SELECT MAX("contrast") AS 'Maximum Contrast' FROM "views" WHERE "artist" = 'Hokusai';
+
+(4) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hiroshige' AND "english_title" LIKE "%Eastern Capital%";
+
+(3) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%Fuji%';
+
+(2) SELECT "average_color" FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%river%';
+
+(1) SELECT "japanese_title", "english_title" FROM "views";
