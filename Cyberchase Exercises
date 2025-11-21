@@ -1,0 +1,27 @@
+##Cyberchase exercises 1-13
+
+(13) SELECT strftime('%Y', "air_date"), strftime('%m-%d', date("air_date", 'start of year')) FROM "episodes" GROUP BY strftime('%Y', "air_date");
+
+(12) SELECT COUNT(DISTINCT "title") FROM "episodes";
+
+(11) SELECT "title" FROM "episodes" WHERE "season" = 5 ORDER BY "title" DESC;
+
+(10) SELECT "id", "title", "production_code" FROM "episodes" ORDER BY "production_code";
+
+(9) SELECT COUNT(*) FROM "episodes" WHERE "air_date" BETWEEN '2002-01-01' AND '2007-12-31';
+
+(8) SELECT COUNT(*) FROM "episodes" WHERE "air_date" BETWEEN '2018-01-01' AND '2023-12-31';
+
+(7) SELECT "title", "topic" FROM "episodes" WHERE "topic" LIKE '%fractions%';
+
+(6) SELECT "title" FROM "episodes" WHERE "season" = 6 AND "air_date" < '2008-01-01';
+
+(5) SELECT "title" FROM "episodes" WHERE "air_date" = '2004-12-31';
+
+(4) SELECT "title" FROM "episodes" WHERE "topic" IS NULL;
+
+(3) SELECT "production_code" FROM "episodes" WHERE "title" = 'Hackerized!';
+
+(2) SELECT "season", "title" FROM "episodes" WHERE "episode_in_season" = 1;
+
+(1) SELECT "title" FROM "episodes" WHERE "season" = 1;
