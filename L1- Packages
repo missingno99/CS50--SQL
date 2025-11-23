@@ -8,18 +8,18 @@ SELECT "address", "type" FROM "addresses" WHERE "id" =
 
 --final version:
 
-SELECT "devious"."contents", "addresses"."type"
-FROM
-  (SELECT "contents", "to_address_id"
-   FROM "packages"
-   WHERE "from_address_id" IS NULL
-  ) AS devious
-JOIN "addresses" ON "addresses"."id" = "devious"."to_address_id";
+SELECT "packages"."contents", "addresses"."type"
+FROM "packages"
+JOIN "scans" ON "scans"."package_id" = "packages"."id"
+JOIN "addresses" ON "addresses"."id" = "scans"."address_id"
+  WHERE "packages"."from_address_id" IS NULL
+  AND "scans"."action" = 'Drop';
 
 
 --first version:
 
 SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" IS NULL), "type" FROM "addresses" WHERE "id" =
-(SELECT "to_address_id" FROM "packages" WHERE "from_address_id" IS NULL);
+  (SELECT "address_id" FROM "scans" WHERE "action" = 'Drop' AND "package_ID" =
+    (SELECT "id" FROM "packages" WHERE "from_address_id" IS NULL));
 
 --Packages exercise 3--
