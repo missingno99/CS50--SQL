@@ -23,3 +23,12 @@ SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" IS NULL), "typ
     (SELECT "id" FROM "packages" WHERE "from_address_id" IS NULL));
 
 --Packages exercise 3--
+
+
+
+--first version:
+
+SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" = (SELECT "id" FROM "addresses" WHERE "address" = '109 Tileston Street')) AS "contents", "name" FROM "drivers" WHERE "id" =
+  (SELECT "driver_id" FROM "scans" WHERE "action" = 'Pick' AND "package_ID" =
+    (SELECT "id" FROM "packages" WHERE "from_address_id" =
+      (SELECT "id" FROM "addresses" WHERE "address" = '109 Tileston Street')) ORDER BY "timestamp" DESC LIMIT 1);
