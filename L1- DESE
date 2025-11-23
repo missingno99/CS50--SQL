@@ -2,9 +2,33 @@
 
 (13)
 
+(10)
 
+(9) SELECT "districts"."name" 
+    FROM "districts" 
+    JOIN "expenditures" ON "districts"."id" = "expenditures"."district_id" 
+    ORDER BY "expenditures"."pupils" 
+    LIMIT 1;
 
+(8) SELECT "districts"."name", "expenditures"."pupils"
+    FROM "districts"
+    JOIN "expenditures" ON "districts"."id" = "expenditures"."district_id";
 
-(2) 
+(7) SELECT "name" FROM "schools" WHERE "district_id" = (SELECT "id" FROM "districts" WHERE "name" = 'Cambridge');
+
+(6) SELECT "name" FROM "schools" WHERE "id" = (SELECT "school_id" FROM "graduation_rates" WHERE "graduated" = 100);
+
+(5) SELECT "city", COUNT(name) FROM "schools" WHERE "type" = 'Public School' 
+    GROUP BY "city" HAVING COUNT(name) <= 3 
+    ORDER BY COUNT(name) DESC, "city";
+
+(4) SELECT "city", COUNT(name) FROM "schools" WHERE "type" = 'Public School' 
+    GROUP BY "city" 
+    ORDER BY COUNT(name) DESC, "city" 
+    LIMIT 10;
+
+(3) SELECT AVG("per_pupil_expenditure") AS "Average District Per-Pupil Expenditure" FROM "expenditures";
+
+(2) SELECT "name" FROM "districts" WHERE "name" LIKE "%non-op%";
 
 (1) SELECT "name", "city" FROM "schools" WHERE "type" = 'Public School' AND "state" = 'MA';
