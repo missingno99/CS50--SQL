@@ -1,0 +1,10 @@
+--Packages exercise 1--
+
+SELECT "address", "type" FROM "addresses" WHERE "id" =
+  (SELECT "address_id" FROM "scans" WHERE "action" = 'Drop' AND "package_id" =
+    (SELECT "id" FROM "packages" WHERE "contents" LIKE '%congratulatory%'));
+
+--Packages exercise 2--
+
+
+--Packages exercise 3--
