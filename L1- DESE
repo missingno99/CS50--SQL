@@ -1,5 +1,10 @@
---Department of Elementary and Secondary Education Exercises
+##Department of Elementary and Secondary Education exercises 1-13
+
+(13)
 
 
+
+
+(2) 
 
 (1) SELECT "name", "city" FROM "schools" WHERE "type" = 'Public School' AND "state" = 'MA';
