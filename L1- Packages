@@ -6,5 +6,20 @@ SELECT "address", "type" FROM "addresses" WHERE "id" =
 
 --Packages exercise 2--
 
+--final version:
+
+SELECT "devious"."contents", "addresses"."type"
+FROM
+  (SELECT "contents", "to_address_id"
+   FROM "packages"
+   WHERE "from_address_id" IS NULL
+  ) AS devious
+JOIN "addresses" ON "addresses"."id" = "devious"."to_address_id";
+
+
+--first version:
+
+SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" IS NULL), "type" FROM "addresses" WHERE "id" =
+(SELECT "to_address_id" FROM "packages" WHERE "from_address_id" IS NULL);
 
 --Packages exercise 3--
