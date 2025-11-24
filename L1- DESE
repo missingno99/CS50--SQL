@@ -1,6 +1,10 @@
 ##Department of Elementary and Secondary Education exercises 1-13
 
-(13)
+(13) SELECT "district_id", "per_pupil_expenditure", "pupils", "exemplary", "unsatisfactory"
+     FROM "expenditures"
+     NATURAL JOIN "staff_evaluations"
+      ORDER BY "per_pupil_expenditure" DESC, "exemplary" DESC
+      LIMIT 20;
 
 (12) SELECT "name", "per_pupil_expenditure", "exemplary"
      FROM "districts"
