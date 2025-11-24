@@ -2,7 +2,16 @@
 
 (12) 
 
-(5)
+(6) SELECT "name", "H" AS "total hits"
+    FROM "performances"
+    JOIN "teams" ON "performances"."team_id" = "teams"."id"
+        WHERE "performances"."year" = 2001
+        ORDER BY "H" DESC
+        LIMIT 5;
+
+(5)SELECT "name" FROM "teams" WHERE "id" IN
+    (SELECT "team_id" FROM "performances" WHERE "player_id" =
+        (SELECT "id" FROM "players" WHERE "first_name" = 'Satchel' AND "last_name" = 'Paige'));
 
 (4) SELECT "first_name", "last_name", "salary"
     FROM (SELECT "id", "first_name", "last_name" FROM "players") AS minplayers
