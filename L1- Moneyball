@@ -2,6 +2,12 @@
 
 (12) 
 
+(8)
+
+(7) SELECT "first_name", "last_name"
+    FROM "players"
+    WHERE "id" = (SELECT "player_id" FROM "salaries" WHERE "salary" = (SELECT MAX(salary) FROM "salaries"));
+
 (6) SELECT "name", "H" AS "total hits"
     FROM "performances"
     JOIN "teams" ON "performances"."team_id" = "teams"."id"
