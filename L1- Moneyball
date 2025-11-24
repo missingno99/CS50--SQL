@@ -1,0 +1,26 @@
+##Moneyball exercises 1-12
+
+(12) 
+
+(5)
+
+(4) SELECT "first_name", "last_name", "salary"
+    FROM (SELECT "id", "first_name", "last_name" FROM "players") AS minplayers
+    JOIN "salaries" ON "minplayers"."id" = "salaries"."player_id"
+    WHERE "year" = '2001'
+    ORDER BY "salary", "first_name", "last_name", "player_ID"
+    LIMIT 50;
+
+(3) SELECT "year", "HR" AS "home runs"
+    FROM "performances"
+    WHERE "player_id" = (SELECT "id" FROM "players" WHERE "first_name" = 'Ken' AND "last_name" = 'Griffey' AND "birth_year" = 1969)
+    ORDER BY "year" DESC;
+
+(2) SELECT "year", "salary"
+    FROM "salaries"
+    WHERE "player_id" = (SELECT "id" FROM "players" WHERE "first_name" = 'Cal' AND "last_name" = 'Ripken')
+    ORDER BY "year" DESC;
+
+(1) SELECT "year", ROUND(AVG(salary), 2) AS "average salary" 
+    FROM "salaries"
+    GROUP BY "year" ORDER BY "year" DESC;
