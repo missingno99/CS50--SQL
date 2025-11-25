@@ -1,6 +1,12 @@
 ##Moneyball exercises 1-12
 
-(12) 
+(12) SELECT "first_name", "last_name"
+     FROM "players"
+     JOIN "performances" ON "players"."id" = "performances"."player_id"
+     JOIN "salaries" ON "performances"."player_id" = "salaries"."player_id" AND "performances"."year" = "salaries"."year"
+         WHERE "performances"."year" = 2001 AND "H" != 0
+         ORDER BY ("salary" / "H"), ("salary" / "RBI"), "salaries"."player_id", "last_name"
+         LIMIT 10;
 
 (11) SELECT "first_name", "last_name", ("salary" / "H") AS "dollars per hit"
      FROM "players"
