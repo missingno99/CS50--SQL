@@ -26,11 +26,12 @@
     FROM "players"
     WHERE "id" = (SELECT "player_id" FROM "salaries" WHERE "salary" = (SELECT MAX(salary) FROM "salaries"));
 
-(6) SELECT "name", "H" AS "total hits"
-    FROM "performances"
-    JOIN "teams" ON "performances"."team_id" = "teams"."id"
+(6) SELECT "name", SUM(H) AS "total hits"
+     FROM "performances"
+     JOIN "teams" ON "performances"."team_id" = "teams"."id"
         WHERE "performances"."year" = 2001
-        ORDER BY "H" DESC
+        GROUP BY "team_id"
+        ORDER BY SUM(H) DESC
         LIMIT 5;
 
 (5)SELECT "name" FROM "teams" WHERE "id" IN
