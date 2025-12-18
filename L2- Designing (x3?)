@@ -1,3 +1,73 @@
+##LinkedIn Connect tables
+
+CREATE TABLE IF NOT EXISTS "users"
+(
+    "id" INTEGER,
+    "first_name" TEXT NOT NULL,
+    "last_name" TEXT NOT NULL,
+    "username" TEXT UNIQUE NOT NULL,
+    "password" TEXT NOT NULL,
+    PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS "schools"
+(
+    "id" INTEGER,
+    "name" TEXT UNIQUE NOT NULL,
+    "type" TEXT NOT NULL,
+    "location" TEXT,
+    "founded" INTEGER,
+    PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS "companies"
+(
+    "id" INTEGER,
+    "name" TEXT UNIQUE NOT NULL,
+    "industry" TEXT NOT NULL,
+    "location" TEXT,
+    PRIMARY KEY("id" AUTOINCREMENT)
+);
+
+
+CREATE TABLE IF NOT EXISTS "followings"
+(
+    "id" INTEGER,
+    "followed_id" INTEGER NOT NULL,
+    "follower_id" INTEGER NOT NULL,
+    PRIMARY KEY("id" AUTOINCREMENT),
+    FOREIGN KEY("followed_id") REFERENCES "users"("id"),
+    FOREIGN KEY("follower_id") REFERENCES "users"("id")
+);
+
+CREATE TABLE IF NOT EXISTS "school_affiliations"
+(
+    "id" INTEGER,
+    "school_id" INTEGER NOT NULL,
+    "student_id" INTEGER NOT NULL,
+    "start_date" NUMERIC NOT NULL,
+    "end_date" NUMERIC NOT NULL,
+    "degree" TEXT NOT NULL,
+    PRIMARY KEY("id" AUTOINCREMENT),
+    FOREIGN KEY("school_id") REFERENCES "schools"("id"),
+    FOREIGN KEY("student_id") REFERENCES "users"("id")
+);
+
+CREATE TABLE IF NOT EXISTS "company_affiliations"
+(
+    "id" INTEGER,
+    "company_id" INTEGER NOT NULL,
+    "student_id" INTEGER NOT NULL,
+    "start_date" NUMERIC NOT NULL,
+    "end_date" NUMERIC NOT NULL,
+    "title" TEXT NOT NULL,
+    PRIMARY KEY("id" AUTOINCREMENT),
+    FOREIGN KEY("company_id") REFERENCES "companies"("id"),
+    FOREIGN KEY("student_id") REFERENCES "users"("id")
+);
+
+
+
 ##Atlanta Airport (ATL) tables
 
 CREATE TABLE IF NOT EXISTS "passengers"
@@ -40,10 +110,3 @@ CREATE TABLE IF NOT EXISTS "flights"
     PRIMARY KEY("id" AUTOINCREMENT),
     FOREIGN KEY("airline_id") REFERENCES "airlines"("id")
 );
-
-
-
-
-##LinkedIn Connect tables
-
-.
