@@ -1,24 +1,24 @@
-##36 Views exercises 1-10
+##Players exercises 1-10
 
-(10) SELECT "english_title" AS "How Many Times is Fuji Mentioned?", "artist" FROM "views" WHERE "english_title" LIKE '%Fuji%' ORDER BY "artist";
+(10) SELECT "first_name", "last_name" FROM "players" WHERE "height" > (SELECT AVG(height) FROM players) ORDER BY (SELECT AVG(height) FROM players) DESC, "first_name", "last_name";
 
-(9) SELECT "english_title", "artist" FROM "views" WHERE "brightness" = (SELECT MAX(brightness) FROM "views");
+(9) SELECT "first_name", "last_name" FROM "players" WHERE strftime('%Y', "final_game") = '2022' ORDER BY "first_name", "last_name";
 
-(8) SELECT "english_title" FROM "views" WHERE "artist" = 'Hokusai' ORDER BY "contrast" LIMIT 5;
+(8) SELECT ROUND(AVG(height), 2) AS 'Average Height', ROUND(AVG(weight), 2) AS 'Average Weight' FROM "players" WHERE "debut" >= '2000-01-01';
 
-(7) SELECT "english_title" FROM "views" WHERE "artist" = 'Hiroshige' ORDER BY "brightness" DESC LIMIT 5;
+(7) SELECT COUNT(*) FROM "players" WHERE ("bats" = 'R' AND "throws" = 'L') OR ("bats" = 'L' AND "throws" = 'R');
 
-(6) SELECT ROUND(AVG(entropy), 2) AS 'Hiroshige Average Entropy' FROM "views" WHERE "artist" = 'Hiroshige';
+(6) SELECT "first_name", "last_name", "debut" FROM "players" WHERE "birth_city" = 'Pittsburgh' AND "birth_state" = 'PA' ORDER BY "debut" DESC, "first_name", "last_name"
+;
+(5) SELECT "first_name", "last_name" FROM "players" WHERE "bats" = 'R' ORDER BY "first_name", "last_name";
 
-(5) SELECT MAX("contrast") AS 'Maximum Contrast' FROM "views" WHERE "artist" = 'Hokusai';
+(4) SELECT "first_name", "last_name" FROM "players" WHERE "birth_country" != 'USA' ORDER BY "first_name", "last_name";
 
-(4) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hiroshige' AND "english_title" LIKE "%Eastern Capital%";
+(3) SELECT "id" FROM "players" WHERE "debut" IS NULL;
 
-(3) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%Fuji%';
+(2) SELECT "bats" FROM "players" WHERE "first_name" = 'Babe' AND "last_name" = 'Ruth';
 
-(2) SELECT "average_color" FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%river%';
-
-(1) SELECT "japanese_title", "english_title" FROM "views";
+(1) SELECT "birth_city", "birth_state", "birth_country" FROM "players" WHERE "first_name" = 'Jackie' AND "last_name" = 'Robinson';
 
 
 
@@ -49,3 +49,27 @@
 (2) SELECT "season", "title" FROM "episodes" WHERE "episode_in_season" = 1;
 
 (1) SELECT "title" FROM "episodes" WHERE "season" = 1;
+
+
+
+##36 Views exercises 1-10
+
+(10) SELECT "english_title" AS "How Many Times is Fuji Mentioned?", "artist" FROM "views" WHERE "english_title" LIKE '%Fuji%' ORDER BY "artist";
+
+(9) SELECT "english_title", "artist" FROM "views" WHERE "brightness" = (SELECT MAX(brightness) FROM "views");
+
+(8) SELECT "english_title" FROM "views" WHERE "artist" = 'Hokusai' ORDER BY "contrast" LIMIT 5;
+
+(7) SELECT "english_title" FROM "views" WHERE "artist" = 'Hiroshige' ORDER BY "brightness" DESC LIMIT 5;
+
+(6) SELECT ROUND(AVG(entropy), 2) AS 'Hiroshige Average Entropy' FROM "views" WHERE "artist" = 'Hiroshige';
+
+(5) SELECT MAX("contrast") AS 'Maximum Contrast' FROM "views" WHERE "artist" = 'Hokusai';
+
+(4) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hiroshige' AND "english_title" LIKE "%Eastern Capital%";
+
+(3) SELECT COUNT(*) FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%Fuji%';
+
+(2) SELECT "average_color" FROM "views" WHERE "artist" = 'Hokusai' AND "english_title" LIKE '%river%';
+
+(1) SELECT "japanese_title", "english_title" FROM "views";
