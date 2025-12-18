@@ -94,7 +94,7 @@
 
 
 
-##Department of Elementary and Secondary Education exercises 1-13
+##Department of Elementary and Secondary Education (DESE) exercises 1-13
 
 (13) SELECT "district_id", "per_pupil_expenditure", "pupils", "exemplary", "unsatisfactory"
      FROM "expenditures"
