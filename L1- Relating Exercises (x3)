@@ -152,3 +152,49 @@
 (2) SELECT "name" FROM "districts" WHERE "name" LIKE "%non-op%";
 
 (1) SELECT "name", "city" FROM "schools" WHERE "type" = 'Public School' AND "state" = 'MA';
+
+
+
+##Packages exercises 1-3
+--Packages exercise 1--
+
+SELECT "address", "type" FROM "addresses" WHERE "id" =
+  (SELECT "address_id" FROM "scans" WHERE "action" = 'Drop' AND "package_id" =
+    (SELECT "id" FROM "packages" WHERE "contents" LIKE '%congratulatory%'));
+
+--Packages exercise 2--
+
+--final version:
+
+SELECT "packages"."contents", "addresses"."type"
+FROM "packages"
+JOIN "scans" ON "scans"."package_id" = "packages"."id"
+JOIN "addresses" ON "addresses"."id" = "scans"."address_id"
+  WHERE "packages"."from_address_id" IS NULL
+  AND "scans"."action" = 'Drop';
+
+
+--first version:
+
+SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" IS NULL), "type" FROM "addresses" WHERE "id" =
+  (SELECT "address_id" FROM "scans" WHERE "action" = 'Drop' AND "package_ID" =
+    (SELECT "id" FROM "packages" WHERE "from_address_id" IS NULL));
+
+--Packages exercise 3--
+
+SELECT "packages"."contents", "drivers"."name"
+FROM "packages"
+JOIN "scans" ON "scans"."package_id" = "packages"."id"
+JOIN "drivers" ON "drivers"."id" = "scans"."driver_id"
+  WHERE "from_address_id" = (SELECT "id" FROM "addresses" WHERE "address" = '109 Tileston Street')
+  AND "action" = 'Pick'
+  ORDER BY "scans"."timestamp" DESC
+  LIMIT 1;
+
+
+--first version:
+
+SELECT (SELECT "contents" FROM "packages" WHERE "from_address_id" = (SELECT "id" FROM "addresses" WHERE "address" = '109 Tileston Street')) AS "contents", "name" FROM "drivers" WHERE "id" =
+  (SELECT "driver_id" FROM "scans" WHERE "action" = 'Pick' AND "package_ID" =
+    (SELECT "id" FROM "packages" WHERE "from_address_id" =
+      (SELECT "id" FROM "addresses" WHERE "address" = '109 Tileston Street')) ORDER BY "timestamp" DESC LIMIT 1);
