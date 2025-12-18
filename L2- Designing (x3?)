@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS "passengers"
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
     "age" INTEGER,
-    PRIMARY KEY("id")
+    PRIMARY KEY("id" AUTOINCREMENT)
 );
 
 CREATE TABLE IF NOT EXISTS "checkins"
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS "checkins"
     "dateandtime" NUMERIC NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "passenger_id" INTEGER,
     "flight_id" INTEGER,
-    PRIMARY KEY("id"),
+    PRIMARY KEY("id" AUTOINCREMENT),
     FOREIGN KEY("passenger_id") REFERENCES "passengers"("id"),
     FOREIGN KEY("flight_id") REFERENCES "flights"("id")
 );
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS "airlines"
     "id" INTEGER,
     "name" TEXT UNIQUE NOT NULL,
     "concourse" TEXT NOT NULL,
-    PRIMARY KEY("id")
+    PRIMARY KEY("id" AUTOINCREMENT)
 );
 
 CREATE TABLE IF NOT EXISTS "flights"
@@ -37,9 +37,10 @@ CREATE TABLE IF NOT EXISTS "flights"
     "arrives_to" TEXT NOT NULL,
     "departs_at" TIMESTAMPTZ NOT NULL,
     "arrives_at" TIMESTAMPTZ NOT NULL,
-    PRIMARY KEY("id"),
+    PRIMARY KEY("id" AUTOINCREMENT),
     FOREIGN KEY("airline_id") REFERENCES "airlines"("id")
 );
+
 
 
 
