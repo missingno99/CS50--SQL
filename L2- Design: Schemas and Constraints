@@ -1,4 +1,10 @@
-##LinkedIn Connect tables
+##DONUTS SHOP tables
+
+a
+
+
+
+##LINKEDIN tables
 
 CREATE TABLE IF NOT EXISTS "users"
 (
@@ -68,7 +74,7 @@ CREATE TABLE IF NOT EXISTS "company_affiliations"
 
 
 
-##Atlanta Airport (ATL) tables
+##ATLANTA AIRPORT (ATL) tables
 
 CREATE TABLE IF NOT EXISTS "passengers"
 (
@@ -94,7 +100,7 @@ CREATE TABLE IF NOT EXISTS "airlines"
 (
     "id" INTEGER,
     "name" TEXT UNIQUE NOT NULL,
-    "concourse" TEXT NOT NULL,
+    "concourse(s)" TEXT NOT NULL,
     PRIMARY KEY("id" AUTOINCREMENT)
 );
 
@@ -103,10 +109,11 @@ CREATE TABLE IF NOT EXISTS "flights"
     "id" INTEGER,
     "number" TEXT NOT NULL,
     "airline_id" INTEGER,
-    "departs_from" TEXT NOT NULL,
-    "arrives_to" TEXT NOT NULL,
-    "departs_at" TIMESTAMPTZ NOT NULL,
-    "arrives_at" TIMESTAMPTZ NOT NULL,
+    "departs_from_code" TEXT NOT NULL,
+    "arrives_to_code" TEXT NOT NULL,
+    "departure_time" TEXT NOT NULL,
+    "arrival_time" TEXT NOT NULL,
     PRIMARY KEY("id" AUTOINCREMENT),
     FOREIGN KEY("airline_id") REFERENCES "airlines"("id")
 );
+
