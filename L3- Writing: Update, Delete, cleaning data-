@@ -1,1 +1,12 @@
-...
+--Update Admin PW to oops!(MD5 hash)
+UPDATE "users"
+SET "password" = '982c0381c279d139fd221fce974916e7'
+WHERE "username" = 'admin';
+
+
+--Update log of oops! to emily33 PW
+UPDATE "user_logs"
+SET "new_password" =
+    (SELECT "password" FROM "users" WHERE "username" = 'emily33')
+WHERE "type" = 'update' AND "new_username" = 'admin' AND "new_password" = '982c0381c279d139fd221fce974916e7'
+;
