@@ -29,20 +29,14 @@ DROP COLUMN "nametype";
 
 --Cleaning2: convert '' into NULL
 UPDATE "temptable"
-SET
-    "mass" = NULL,
-    "year" = NULL,
-    "lat" = NULL,
-    "long" = NULL
-
-WHERE "mass" = ''
-OR    "year" = ''
-OR    "lat" = ''
-OR    "long" = '';
+SET "mass" = CASE WHEN "mass" = '' THEN NULL ELSE "mass" END,
+        "year" = CASE WHEN "year" = '' THEN NULL ELSE "year" END,
+        "lat" = CASE WHEN "lat" = '' THEN NULL ELSE "lat" END,
+        "long" = CASE WHEN "long" = '' THEN NULL ELSE "long" END;
 
 
 --Cleaning3: ROUND decimals
-UPDATE "temptable"
+UPDATE "temptable2"
 SET
     "mass" = ROUND("mass", 2),
     "lat" = ROUND("lat", 2),
@@ -60,7 +54,6 @@ CREATE TABLE IF NOT EXISTS "meteorites"
     "lat" REAL,
     "long" REAL
 );
-
 
 --INSERT temptable INTO meteorites
 INSERT INTO "meteorites"
@@ -86,6 +79,7 @@ ORDER BY "year", "name";
 
 --DROP "temptable"
 DROP TABLE "temptable";
+
 
 
 
