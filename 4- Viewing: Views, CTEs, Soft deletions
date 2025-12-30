@@ -14,22 +14,14 @@
 
 ##Ex 1
 
-CREATE VIEW IF NOT EXISTS "most_populated" AS
-SELECT "district", SUM("families"), SUM("households"), SUM("population"), SUM("male"), SUM("female")
+CREATE VIEW most_populated AS
+SELECT
+    "district",
+    SUM("families") AS "families",
+    SUM("households") AS "households",
+    SUM("population") AS "population",
+    SUM("male") AS "male",
+    SUM("female") AS "female"
 FROM "census"
-GROUP BY "district";
-
-
-
-///delete////
-CREATE VIEW IF NOT EXISTS "by_district" AS
-SELECT SUM("families"), SUM("households"), SUM("population"), SUM("male"), SUM("female")
-FROM "census"
-GROUP BY "district";
-
-CREATE VIEW IF NOT EXISTS "total" AS
-SELECT SUM("families"), SUM("households"), SUM("population"), SUM("male"), SUM("female")
-FROM "census";
-
-CREATE VIEW IF NOT EXISTS "rural" AS
-SELECT * FROM "census" WHERE "locality" LIKE "%Rural%";
+GROUP BY "district"
+ORDER BY "population" DESC;
