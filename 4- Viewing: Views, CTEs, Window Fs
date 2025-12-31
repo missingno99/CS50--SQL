@@ -1,0 +1,95 @@
+##Ex 3
+
+
+
+
+
+##Ex 2
+
+--CREATE TABLE for cipher
+CREATE TABLE "cipher"
+(
+    "id" INTEGER PRIMARY KEY,
+    "triplet" INTEGER,
+    "number" INTEGER
+);
+
+--INSERT values into cipher
+INSERT INTO "cipher"
+(
+    "triplet",
+    "number"
+)
+VALUES
+(1, 14),
+(1, 98),
+(1, 4),
+(2, 114),
+(2, 3),
+(2, 5),
+(3, 618),
+(3, 72),
+(3, 9),
+(4, 630),
+(4, 7),
+(4, 3),
+(5, 932),
+(5, 12),
+(5, 5),
+(6, 2230),
+(6, 50),
+(6, 7),
+(7, 2346),
+(7, 44),
+(7, 10),
+(8, 3041),
+(8, 14),
+(8, 5);
+
+
+--CREATE VIEW to decode
+CREATE VIEW "message" AS
+--CTE: autocollect data from cipher
+WITH "autocollect" AS
+(
+    SELECT
+        "triplet",
+        MAX(CASE WHEN "tprow" = 1 THEN "number" END) AS "sentence_id",
+        MAX(CASE WHEN "tprow" = 2 THEN "number" END) AS "start",
+        MAX(CASE WHEN "tprow" = 3 THEN "number" END) AS "length"
+    FROM
+    (
+        SELECT
+            "triplet",
+            "number",
+            ROW_NUMBER() OVER
+            (PARTITION BY "triplet"
+            ORDER BY "triplet") AS "tprow"
+        FROM "cipher"
+    )
+    GROUP BY "triplet"
+)
+--Complete view: use autocollected data & decode
+SELECT
+    SUBSTR("sentences"."sentence", "start", "length") AS "phrase"
+FROM "prep"
+JOIN "sentences"
+    ON "sentences"."id" = "sentence_id";
+
+
+
+
+
+##Ex 1
+
+CREATE VIEW most_populated AS
+SELECT
+    "district",
+    SUM("families") AS "families",
+    SUM("households") AS "households",
+    SUM("population") AS "population",
+    SUM("male") AS "male",
+    SUM("female") AS "female"
+FROM "census"
+GROUP BY "district"
+ORDER BY "population" DESC;
