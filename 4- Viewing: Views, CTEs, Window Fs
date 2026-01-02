@@ -49,8 +49,8 @@ VALUES
 
 --CREATE VIEW to decode
 CREATE VIEW "message" AS
---CTE: autocollect data from cipher
-WITH "autocollect" AS
+--CTE: prepare data from cipher
+WITH "prep" AS
 (
     SELECT
         "triplet",
@@ -69,7 +69,7 @@ WITH "autocollect" AS
     )
     GROUP BY "triplet"
 )
---Complete view: use autocollected data & decode
+--Complete view: use prepared data & decode
 SELECT
     SUBSTR("sentences"."sentence", "start", "length") AS "phrase"
 FROM "prep"
