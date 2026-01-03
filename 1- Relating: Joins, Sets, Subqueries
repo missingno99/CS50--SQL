@@ -1,5 +1,19 @@
 ##Moneyball exercises 1-12
 
+(extra)   SELECT "friend_id"
+          FROM "friends"
+          WHERE "user_id" =
+              (SELECT "id"
+              FROM "users"
+              WHERE "username" = 'lovelytrust487')
+          INTERSECT
+          SELECT "friend_id"
+          FROM "friends"
+          WHERE "user_id" =
+              (SELECT "id"
+              FROM "users"
+              WHERE "username" = 'exceptionalinspiration482');
+
 (12) SELECT "first_name", "last_name"
      FROM
           (SELECT "first_name", "last_name", "id"
